@@ -54,6 +54,16 @@ export async function generateMetadata({
       default: t("homeTitle"),
       template: `%s | ${SITE_NAME}`,
     },
+    icons: {
+      icon: [
+        { url: "/favicon.ico" },
+        { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+        { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      ],
+      apple: "/apple-touch-icon.png",
+      shortcut: "/favicon.ico",
+    },
+    manifest: "/manifest.webmanifest",
     robots: {
       index: true,
       follow: true,
