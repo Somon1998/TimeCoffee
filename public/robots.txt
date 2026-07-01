@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://timecoffee.shop/sitemap.xml
