@@ -7,11 +7,13 @@ import type {
 } from "@/types";
 import {
   DEMO_IMAGES,
+  HERO_VIDEO,
   PRODUCT_IMAGES,
 } from "@/lib/image-placeholders";
 
 export {
   DEMO_IMAGES,
+  HERO_VIDEO,
   PRODUCT_IMAGES,
   getProductPlaceholder,
 } from "@/lib/image-placeholders";
@@ -19,7 +21,7 @@ export {
 export const SITE_NAME = "TimeCoffee";
 export const SITE_TAGLINE = "Вкус, который всегда с вами";
 export const SITE_DESCRIPTION =
-  "TimeCoffee — бренд растворимого кофе 3 в 1 из Душанбе, Таджикистан. Кофе с молоком и сахаром для дома, офиса и дороги.";
+  "TimeCoffee — бренд растворимого кофе 3 в 1 из Таджикистана. Кофе со сливками и сахаром для дома, офиса и дороги.";
 
 export const NAV_ROUTES = [
   { href: "/", key: "home" },
@@ -38,7 +40,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "1",
     name: "TimeCoffee 3 в 1 мягкий",
-    description: "Мягкий вкус с молоком, кофе и сахаром — идеален для ежедневного напитка",
+    description: "Мягкий вкус со сливками, кофе и сахаром — идеален для ежедневного напитка",
     imageUrl: PRODUCT_IMAGES.productLine,
     categories: ["coffee-3in1"],
     isAvailable: true,
@@ -102,7 +104,7 @@ export const REVIEWS: Review[] = [
   {
     id: "3",
     customerName: "Сара Н.",
-    text: "Удобный формат 3 в 1: не нужно отдельно молоко и сахар. Заказываю через WhatsApp — всё быстро.",
+    text: "Удобный формат 3 в 1: не нужны отдельно сливки и сахар. Заказываю через WhatsApp — всё быстро.",
     rating: 5,
     isVisible: true,
   },
@@ -117,7 +119,7 @@ export const REVIEWS: Review[] = [
 
 export const CONTACT_SETTINGS: ContactSettings = {
   country: "Таджикистан",
-  city: "Душанбе",
+  city: "Таджикистан",
   phone: "+992 94 003 20 20",
   whatsapp: "992937301953",
   whatsappDisplay: "+992 93 730 19 53",
@@ -125,7 +127,7 @@ export const CONTACT_SETTINGS: ContactSettings = {
   telegramUrl: "https://t.me/TimeCoffeetjk",
   tiktok: "",
   youtube: "",
-  address: "г. Душанбе, Таджикистан",
+  address: "Таджикистан",
   mapUrl:
     "https://www.google.com/maps/place/%D0%94%D1%83%D1%88%D0%B0%D0%BD%D0%B1%D0%B5,+%D0%A2%D0%B0%D0%B4%D0%B6%D0%B8%D0%BA%D0%B8%D1%81%D1%82%D0%B0%D0%BD/@38.5416391,68.7993794,16z/data=!4m6!3m5!1s0x38b5d127f601c729:0x29525b9787d4a994!8m2!3d38.5417354!4d68.7978523!16s%2Fg%2F11c2vm_kr9?g_ep=Eg1tbF8yMDI2MDYxNF8wIOC7DCoASAJQAg%3D%3D",
   mapEmbedUrl:

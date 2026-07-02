@@ -1,6 +1,7 @@
 "use client";
 
-import { SiteImage } from "@/components/ui/SiteImage";
+import { HeroProductVisual } from "@/components/ui/HeroProductVisual";
+import { HeroSteamEffect } from "@/components/ui/HeroSteamEffect";
 import { PremiumBackground } from "@/components/ui/PremiumBackground";
 import {
   motion,
@@ -19,7 +20,7 @@ import {
   heroImageVariants,
   heroTextVariants,
 } from "@/features/theme/motion";
-import { SITE_NAME, DEMO_IMAGES } from "@/lib/site-config";
+import { SITE_NAME, DEMO_IMAGES, HERO_VIDEO } from "@/lib/site-config";
 
 type HeroScrollMotion = {
   imageY: MotionValue<number>;
@@ -28,12 +29,20 @@ type HeroScrollMotion = {
   imageScale: MotionValue<number>;
 };
 
+type HeroMotionPrefs = {
+  videoEnabled: boolean;
+  floatEnabled: boolean;
+  steamAnimated: boolean;
+};
+
 function HeroSectionView({
   sectionRef,
   scrollMotion,
+  motionPrefs = { videoEnabled: false, floatEnabled: false, steamAnimated: false },
 }: {
   sectionRef: RefObject<HTMLElement | null>;
   scrollMotion?: HeroScrollMotion;
+  motionPrefs?: HeroMotionPrefs;
 }) {
   const t = useTranslations("hero");
 
@@ -52,25 +61,16 @@ function HeroSectionView({
           />
           <motion.div
             style={{ y: scrollMotion.textY }}
-            className="product-glow -left-20 bottom-12 h-72 w-72 bg-brand-300/15 dark:bg-brand-400/10"
-            animate={{ opacity: [0.45, 0.75, 0.45] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="product-glow product-glow--pulse -left-20 bottom-12 h-72 w-72 bg-brand-300/15 dark:bg-brand-400/10"
           />
         </>
       ) : (
         <>
           <div className="product-glow -right-16 top-28 h-[26rem] w-[26rem] bg-brand-400/20 dark:bg-brand-500/12" />
-          <motion.div
-            className="product-glow -left-20 bottom-12 h-72 w-72 bg-brand-300/15 dark:bg-brand-400/10"
-            animate={{ opacity: [0.45, 0.75, 0.45] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          />
+          <div className="product-glow product-glow--pulse -left-20 bottom-12 h-72 w-72 bg-brand-300/15 dark:bg-brand-400/10" />
         </>
       )}
-      <div
-        className="product-glow right-[18%] top-[42%] h-56 w-56 bg-brand-200/30 dark:bg-brand-400/8"
-        style={{ animationDelay: "2s" }}
-      />
+      <div className="product-glow product-glow--delayed right-[18%] top-[42%] h-56 w-56 bg-brand-200/30 dark:bg-brand-400/8" />
 
       <Container className="relative flex min-h-[calc(92vh-6.5rem)] flex-col items-center justify-center gap-10 sm:min-h-[calc(100vh-7.5rem)] lg:flex-row lg:items-center lg:gap-12 xl:gap-16">
         <motion.div
@@ -146,9 +146,17 @@ function HeroSectionView({
           className="relative w-full max-w-[340px] flex-1 sm:max-w-[520px] lg:max-w-none lg:flex-[0.56] xl:flex-[0.58]"
         >
           <motion.div
-            animate={floatAnimation}
+            animate={motionPrefs.floatEnabled ? floatAnimation : undefined}
             className="relative mx-auto w-full lg:scale-[1.04] xl:scale-[1.06]"
           >
+            <div
+              className="hero-product-back-glow absolute -inset-14 rounded-full sm:-inset-16"
+              aria-hidden
+            />
+            <div
+              className="hero-product-back-glow hero-product-back-glow--accent absolute -inset-8 rounded-[2.75rem] sm:-inset-10"
+              aria-hidden
+            />
             <div className="product-glow-ring absolute -inset-3 rounded-[2.5rem] sm:-inset-5" aria-hidden />
 
             <div
@@ -164,15 +172,20 @@ function HeroSectionView({
               aria-hidden
             />
 
-            <div className="relative aspect-[5/4] overflow-hidden rounded-[2rem] border border-brand-300/50 shadow-product-glow ring-1 ring-brand-400/20 dark:border-brand-500/30 dark:ring-brand-400/15 sm:aspect-[4/3]">
-              <SiteImage
-                src={DEMO_IMAGES.hero}
+            <div className="relative aspect-[3/2] overflow-hidden rounded-[2rem] border border-brand-300/50 shadow-product-glow ring-1 ring-brand-400/20 dark:border-brand-500/30 dark:ring-brand-400/15 sm:aspect-[16/10]">
+              <HeroProductVisual
+                videoEnabled={motionPrefs.videoEnabled}
+                imageSrc={DEMO_IMAGES.hero}
+                videoSrc={HERO_VIDEO}
                 alt={t("imageAlt")}
-                width={1200}
-                height={800}
-                className="h-full w-full scale-[1.12] object-cover object-[center_40%]"
-                priority
+                sizes="(max-width: 640px) 340px, (max-width: 1024px) 520px, 56vw"
               />
+              {!motionPrefs.videoEnabled && (
+                <HeroSteamEffect
+                  animated={motionPrefs.steamAnimated}
+                  className="left-[14%] top-[8%] h-[42%] w-[28%] sm:left-[16%] sm:top-[6%] sm:h-[44%] sm:w-[26%]"
+                />
+              )}
             </div>
 
             <div
@@ -186,7 +199,11 @@ function HeroSectionView({
   );
 }
 
-function HeroSectionParallax() {
+function HeroSectionParallax({
+  motionPrefs,
+}: {
+  motionPrefs: HeroMotionPrefs;
+}) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -201,43 +218,69 @@ function HeroSectionParallax() {
     <HeroSectionView
       sectionRef={ref}
       scrollMotion={{ imageY, textY, opacity, imageScale }}
+      motionPrefs={motionPrefs}
     />
   );
 }
 
-function HeroSectionStatic() {
+function HeroSectionStatic({
+  motionPrefs,
+}: {
+  motionPrefs: HeroMotionPrefs;
+}) {
   const ref = useRef<HTMLElement>(null);
-  return <HeroSectionView sectionRef={ref} />;
+  return <HeroSectionView sectionRef={ref} motionPrefs={motionPrefs} />;
 }
 
-function useHeroParallaxEnabled() {
-  const [enabled, setEnabled] = useState(false);
+function useHeroMotionPrefs() {
+  const [prefs, setPrefs] = useState({
+    parallaxEnabled: false,
+    videoEnabled: false,
+    floatEnabled: false,
+    steamAnimated: false,
+  });
 
   useEffect(() => {
-    const mobileQuery = window.matchMedia("(max-width: 767px)");
+    const tabletQuery = window.matchMedia("(max-width: 767px)");
+    const desktopQuery = window.matchMedia("(max-width: 1023px)");
     const reducedMotionQuery = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     );
 
     const update = () => {
-      setEnabled(!mobileQuery.matches && !reducedMotionQuery.matches);
+      const reduced = reducedMotionQuery.matches;
+      const desktopMotion = !desktopQuery.matches && !reduced;
+      const videoEnabled = !reduced;
+
+      setPrefs({
+        parallaxEnabled: !tabletQuery.matches && !reduced,
+        videoEnabled,
+        floatEnabled: desktopMotion && !videoEnabled,
+        steamAnimated: desktopMotion && !videoEnabled,
+      });
     };
 
     update();
-    mobileQuery.addEventListener("change", update);
+    tabletQuery.addEventListener("change", update);
+    desktopQuery.addEventListener("change", update);
     reducedMotionQuery.addEventListener("change", update);
 
     return () => {
-      mobileQuery.removeEventListener("change", update);
+      tabletQuery.removeEventListener("change", update);
+      desktopQuery.removeEventListener("change", update);
       reducedMotionQuery.removeEventListener("change", update);
     };
   }, []);
 
-  return enabled;
+  return prefs;
 }
 
 export function HeroSection() {
-  const parallaxEnabled = useHeroParallaxEnabled();
+  const { parallaxEnabled, ...motionPrefs } = useHeroMotionPrefs();
 
-  return parallaxEnabled ? <HeroSectionParallax /> : <HeroSectionStatic />;
+  return parallaxEnabled ? (
+    <HeroSectionParallax motionPrefs={motionPrefs} />
+  ) : (
+    <HeroSectionStatic motionPrefs={motionPrefs} />
+  );
 }

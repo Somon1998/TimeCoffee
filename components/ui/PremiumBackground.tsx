@@ -18,7 +18,9 @@ export function PremiumBackground({
           <div className="absolute inset-0 bg-noise opacity-[0.14] mix-blend-overlay" />
           <div className="absolute inset-0 bg-radial-blue opacity-80 dark:opacity-60" />
           <div className="absolute inset-0 bg-radial-gold opacity-40 dark:opacity-25" />
+          <div className="absolute inset-0 bg-radial-coffee opacity-60 dark:opacity-40" />
           <div className="absolute inset-0 bg-radial-brand pointer-events-none opacity-70 dark:opacity-50" />
+          <div className="hero-atmosphere-glow absolute inset-0" />
         </>
       ) : (
         <>

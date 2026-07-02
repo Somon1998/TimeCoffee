@@ -11,8 +11,10 @@ export const PRODUCT_IMAGES = {
 /** Demo-фото в public/images/production/ — галерея, офферы и прочие секции */
 const PRODUCTION_PHOTOS = "/images/production";
 
+export const HERO_VIDEO = "/videos/hero-timecoffee.mp4";
+
 export const DEMO_IMAGES = {
-  hero: "/images/hero/time-coffee-product-hero-new.png",
+  hero: "/images/hero/time-coffee-sticks-hero.png",
   productSoft: `${PRODUCTION_PHOTOS}/product-soft.jpg`,
   productOriginal: `${PRODUCTION_PHOTOS}/product-original.jpg`,
   productMilk: `${PRODUCTION_PHOTOS}/product-milk.jpg`,
