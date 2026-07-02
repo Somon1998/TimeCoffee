@@ -105,6 +105,21 @@
       }
     }
   },
+  "giveaway": {
+    "badge": "Розыгрыш",
+    "title": "Розыгрыш TimeCoffee",
+    "subtitle": "Покупайте продукцию TimeCoffee, сохраняйте упаковку или код и участвуйте в розыгрыше призов.",
+    "steps": {
+      "1": "Купите продукцию TimeCoffee",
+      "2": "Сохраните упаковку или код",
+      "3": "Свяжитесь с нами через WhatsApp или Telegram",
+      "4": "Участвуйте в розыгрыше"
+    },
+    "ctaWhatsapp": "Участвовать через WhatsApp",
+    "ctaTelegram": "Участвовать через Telegram",
+    "disclaimer": "Подробные условия акции уточняйте у представителей TimeCoffee.",
+    "participateMessage": "Здравствуйте! Хочу участвовать в розыгрыше TimeCoffee."
+  },
   "whyChooseUs": {
     "badge": "Преимущества",
     "title": "Почему выбирают TimeCoffee",

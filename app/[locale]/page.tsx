@@ -1,6 +1,7 @@
 import { HeroSection } from "@/features/home/HeroSection";
 import { BrandStorySection } from "@/features/home/BrandStorySection";
 import { MenuPreviewSection } from "@/features/home/MenuPreviewSection";
+import { GiveawaySection } from "@/features/home/GiveawaySection";
 import { WhyChooseUsSection } from "@/features/home/WhyChooseUsSection";
 import { GallerySection } from "@/features/home/GallerySection";
 import { ContactSection } from "@/features/home/ContactSection";
@@ -26,6 +27,7 @@ export default async function HomePage({ params }: Props) {
       <HeroSection />
       <BrandStorySection />
       <MenuPreviewSection />
+      <GiveawaySection />
       <WhyChooseUsSection />
       <GallerySection />
       <ContactSection />
