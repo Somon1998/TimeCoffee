@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AboutImageShowcase } from "@/features/about/AboutImageShowcase";
 import { AboutStoryPanel } from "@/features/about/AboutStoryPanel";
+import { AboutProductDirections } from "@/features/about/AboutProductDirections";
 import { AboutValueCards } from "@/features/about/AboutValueCards";
 
 export function AboutPageContent() {
@@ -59,6 +60,8 @@ export function AboutPageContent() {
           </AboutStoryPanel>
         </div>
       </Container>
+
+      <AboutProductDirections />
     </div>
   );
 }

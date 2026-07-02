@@ -7,13 +7,11 @@ import type {
 } from "@/types";
 import {
   DEMO_IMAGES,
-  HERO_VIDEO,
   PRODUCT_IMAGES,
 } from "@/lib/image-placeholders";
 
 export {
   DEMO_IMAGES,
-  HERO_VIDEO,
   PRODUCT_IMAGES,
   getProductPlaceholder,
 } from "@/lib/image-placeholders";

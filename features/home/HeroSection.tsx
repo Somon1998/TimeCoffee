@@ -1,7 +1,7 @@
 "use client";
 
-import { HeroProductVisual } from "@/components/ui/HeroProductVisual";
 import { HeroSteamEffect } from "@/components/ui/HeroSteamEffect";
+import { SiteImage } from "@/components/ui/SiteImage";
 import { PremiumBackground } from "@/components/ui/PremiumBackground";
 import {
   motion,
@@ -20,7 +20,7 @@ import {
   heroImageVariants,
   heroTextVariants,
 } from "@/features/theme/motion";
-import { SITE_NAME, DEMO_IMAGES, HERO_VIDEO } from "@/lib/site-config";
+import { SITE_NAME, DEMO_IMAGES } from "@/lib/site-config";
 
 type HeroScrollMotion = {
   imageY: MotionValue<number>;
@@ -30,7 +30,6 @@ type HeroScrollMotion = {
 };
 
 type HeroMotionPrefs = {
-  videoEnabled: boolean;
   floatEnabled: boolean;
   steamAnimated: boolean;
 };
@@ -38,7 +37,7 @@ type HeroMotionPrefs = {
 function HeroSectionView({
   sectionRef,
   scrollMotion,
-  motionPrefs = { videoEnabled: false, floatEnabled: false, steamAnimated: false },
+  motionPrefs = { floatEnabled: false, steamAnimated: false },
 }: {
   sectionRef: RefObject<HTMLElement | null>;
   scrollMotion?: HeroScrollMotion;
@@ -173,19 +172,19 @@ function HeroSectionView({
             />
 
             <div className="relative aspect-[3/2] overflow-hidden rounded-[2rem] border border-brand-300/50 shadow-product-glow ring-1 ring-brand-400/20 dark:border-brand-500/30 dark:ring-brand-400/15 sm:aspect-[16/10]">
-              <HeroProductVisual
-                videoEnabled={motionPrefs.videoEnabled}
-                imageSrc={DEMO_IMAGES.hero}
-                videoSrc={HERO_VIDEO}
+              <SiteImage
+                src={DEMO_IMAGES.hero}
                 alt={t("imageAlt")}
+                width={2614}
+                height={1394}
                 sizes="(max-width: 640px) 340px, (max-width: 1024px) 520px, 56vw"
+                className="h-full w-full object-cover object-center"
+                priority
               />
-              {!motionPrefs.videoEnabled && (
-                <HeroSteamEffect
-                  animated={motionPrefs.steamAnimated}
-                  className="left-[14%] top-[8%] h-[42%] w-[28%] sm:left-[16%] sm:top-[6%] sm:h-[44%] sm:w-[26%]"
-                />
-              )}
+              <HeroSteamEffect
+                animated={motionPrefs.steamAnimated}
+                className="left-[14%] top-[8%] h-[42%] w-[28%] sm:left-[16%] sm:top-[6%] sm:h-[44%] sm:w-[26%]"
+              />
             </div>
 
             <div
@@ -235,7 +234,6 @@ function HeroSectionStatic({
 function useHeroMotionPrefs() {
   const [prefs, setPrefs] = useState({
     parallaxEnabled: false,
-    videoEnabled: false,
     floatEnabled: false,
     steamAnimated: false,
   });
@@ -250,13 +248,11 @@ function useHeroMotionPrefs() {
     const update = () => {
       const reduced = reducedMotionQuery.matches;
       const desktopMotion = !desktopQuery.matches && !reduced;
-      const videoEnabled = !reduced;
 
       setPrefs({
         parallaxEnabled: !tabletQuery.matches && !reduced,
-        videoEnabled,
-        floatEnabled: desktopMotion && !videoEnabled,
-        steamAnimated: desktopMotion && !videoEnabled,
+        floatEnabled: desktopMotion,
+        steamAnimated: desktopMotion,
       });
     };
 
