@@ -38,6 +38,9 @@ export function BrandStorySection() {
             <p className="text-[1.0625rem] leading-[1.8] text-brand-800/70 dark:text-brand-200/75">
               {t("homeParagraph2")}
             </p>
+            <p className="text-[1.0625rem] leading-[1.8] text-brand-800/70 dark:text-brand-200/75">
+              {t("homeParagraph3")}
+            </p>
             <motion.div
               variants={fadeInUp}
               initial="hidden"
